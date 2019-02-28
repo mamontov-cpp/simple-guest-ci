@@ -561,11 +561,7 @@ body.is-loading #header.alt .inner {
 
 @media screen and (max-width: 480px) {
 	#intro, .large-block {
-		padding: 2em 1em 0.1em 1em;
-	}
-
-	#intro, .large-block p br {
-		display: none;
+		padding: 2em 1em 1em 1em;
 	}
 }
 

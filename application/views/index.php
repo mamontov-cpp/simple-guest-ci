@@ -35,9 +35,9 @@ $this->view('include/header');
 		<p><a href="/auth/login/">Авторизуйтесь</a> или <a href="/auth/register">Зарегистрируйтесь</a>, чтобы оставлять комментарии.</p>
 	<?php endif;?>
 </section>
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/skel.min.js"></script>
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/jquery.min.js?2"></script>
+<script src="/assets/js/skel.min.js?2"></script>
+<script src="/assets/js/main.js?2"></script>
 <script type="text/javascript">
 	window["userId"] = "<?php echo $userId?>";
 	window["csrf_hash"] = "<?php echo $csrf_hash?>";

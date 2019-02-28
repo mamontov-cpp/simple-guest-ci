@@ -11,9 +11,9 @@ if (isset($noScriptsInFooter)) {
 </footer>
 </div>
 <?php if ($addScripts):?>
-    <script src="/assets/js/jquery.min.js"></script>
-	<script src="/assets/js/skel.min.js"></script>
-	<script src="/assets/js/main.js"></script>
+    <script src="/assets/js/jquery.min.js?2"></script>
+	<script src="/assets/js/skel.min.js?2"></script>
+	<script src="/assets/js/main.js?2"></script>
 <?php endif;?>
 </body>
 </html>
