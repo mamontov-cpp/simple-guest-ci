@@ -32,7 +32,7 @@ class Posts_model extends CI_Model
 		$cursor = $this->db->query("SELECT COUNT(`id`) AS `count` FROM `posts`")->result();
 		$count = intval($cursor[0]->count);
 		if ($count === 0) {
-			return 1;
+			return 0;
 		}
 		if (($count % self::PAGE_SIZE) == 0) {
 			return $count / self::PAGE_SIZE;

@@ -599,14 +599,14 @@ input[type=submit] {
 	outline: none;
 }
 
-#errorMessage p {
+#errorMessage p, .errorMessages p {
 	border: 1px solid rgb(255,128,128);
 	background-color: rgb(255,250,250);
 	border-radius: 6px;
 	padding: 0.5em;
 }
 
-#errorMessage p.ok {
+#errorMessage p.ok, .errorMessages p.ok {
 	border: 1px solid rgb(128,255, 128);
 	background-color: rgb(250,255, 250);
 	border-radius: 6px;
@@ -708,4 +708,11 @@ body .post {
 	position: relative;
 	padding-top: 2em;
 	text-align: left;
+}
+
+.post a.delete{
+	text-align: right;
+	position: absolute;
+	top: 1em;
+	right: 1em;
 }

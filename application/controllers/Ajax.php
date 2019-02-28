@@ -29,7 +29,11 @@ class Ajax extends CI_Controller
 		if ($type == "add") {
 			$this->_add();
 		} else {
-			show_404();
+			if ($type == "delete") {
+				$this->_delete();
+			} else {
+				show_404();
+			}
 		}
 	}
 
@@ -95,6 +99,34 @@ class Ajax extends CI_Controller
 		$cap = $this->captcha_model->makeCAPTCHAEntry();
 		$result["captcha_image"] = $cap["image"];
 		$result["captcha_id"] = $cap["id"];
+		echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	}
+
+	/**
+	 * Удаление поста пользователем - на входе id поста
+	 */
+	private function _delete()
+	{
+		$this->load->model("posts_model");
+		// Т.к. страница добавления, то достаточно лишь вывести данные JSON, в MVC смысла особого нет
+		$result = array();
+		if ($this->input->method(true) == "POST") {
+			if ($this->ion_auth->logged_in()) {
+				$userId = $this->ion_auth->get_user_id();
+				$id = $this->input->post("id");
+				try {
+					$this->posts_model->delete($id, $userId);
+					$result["ok"] = true;
+				} catch(\Exception $ex) {
+					$result["error"]  = $ex->getMessage();
+				}
+			} else {
+				$result["error"] = "Для выполненния запроса необходимо авторизоваться.";
+			}
+		} else {
+			$result["error"] = "Некорректный метод запроса";
+		}
+		$result["csrf_hash"] =  $this->security->get_csrf_hash();
 		echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 	}
 }

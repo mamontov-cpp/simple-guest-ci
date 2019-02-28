@@ -39,10 +39,10 @@ $this->view('include/header');
 <script src="/assets/js/skel.min.js"></script>
 <script src="/assets/js/main.js"></script>
 <script type="text/javascript">
+	window["userId"] = "<?php echo $userId?>";
+	window["csrf_hash"] = "<?php echo $csrf_hash?>";
 	showPagination(<?php echo (string)$pagesCount?>, <?php echo (string)$currentPage?>);
 	showPage(<?php echo json_encode($page, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)?>);
-	window["csrf_hash"] = "<?php echo $csrf_hash?>";
-	window["userId"] = "<?php echo $userId?>";
 </script>
 <?php
 $this->view('include/footer');
