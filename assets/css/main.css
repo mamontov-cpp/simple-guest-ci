@@ -555,7 +555,7 @@ body.is-loading #header.alt .inner {
 
 @media screen and (max-width: 736px) {
 	#intro, .large-block {
-		padding: 2em 2em 0.1em 2em;
+		padding: 2em 2em 1em 2em;
 	}
 }
 
@@ -681,21 +681,31 @@ p.save-btn-edit-wrapper {
 	border-radius: 4px;
 }
 
-.post {
+body .post {
+	padding-left: 1em;
+}
+
+.post, #page-load-errors {
 	position: relative;
+	margin-bottom: 2em;
 }
 
 .posts-name {
 	text-align: left;
-	border-bottom: dotted 1px;
 	top: 1em;
 	left: 1em;
+	position: absolute;
 }
 
 .posts-date {
 	text-align: right;
-	border-bottom: dotted 1px;
 	position: absolute;
 	top: 1em;
-	right: 1em;
+	right: 3em;
+}
+
+.posts-text {
+	position: relative;
+	padding-top: 2em;
+	text-align: left;
 }

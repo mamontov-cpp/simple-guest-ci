@@ -41,7 +41,9 @@ class Mainpage extends CI_Controller
 		$count = $this->posts_model->getPagesCount();
 		$data["pagesCount"] = $count;
 		$data["currentPage"] = 1;
-        //var_dump($this->posts_model->getPage($count));
+
+		$data["userId"] = ($this->ion_auth->logged_in()) ? $this->ion_auth->get_user_id() : "0";
+		$data['page'] = $this->posts_model->getPage(1);
 		$this->load->view('index', $data);
 	}
 }

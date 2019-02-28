@@ -22,6 +22,7 @@ class Ajax extends CI_Controller
 	}
 	/**
 	 * Логика для работы системы с комментариями
+	 * @param string $type тип страницы
 	 */
 	public function posts($type)
 	{
@@ -33,12 +34,35 @@ class Ajax extends CI_Controller
 	}
 
 	/**
+	 * Возвращает страницу для работы системы
+	 * @param int $page номер страницы
+	 */
+	public function posts_get_page($page)
+	{
+		$this->load->model("posts_model");
+
+		if (!is_string($page) && !is_numeric($page)) {
+			$this->posts_get_page(1);
+			return;
+		}
+		$page = intval($page);
+		if ($page <= 0) {
+			$this->posts_get_page(1);
+			return;
+		}
+		$result = array();
+		$result["pageCount"] = $this->posts_model->getPagesCount();
+		$result["page"] = $page;
+		$result["items"] = $this->posts_model->getPage($page);
+		echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+	}
+
+	/**
 	 * Добавление поста
 	 */
 	private function _add()
 	{
 		$this->load->model("captcha_model");
-
 		$this->load->model("posts_model");
 		// Т.к. страница добавления, то достаточно лишь вывести данные JSON, в MVC смысла особого нет
 		$result = array();
@@ -54,7 +78,7 @@ class Ajax extends CI_Controller
 						$result["ok"] = true;
 						$result["pages"] = $this->posts_model->getPagesCount();
 						$result["current_page"] = $result["pages"];
-						$result["page"] = $this->posts_model->getPage($result["pages"]);
+						$result["items"] = $this->posts_model->getPage($result["pages"]);
 					} catch(\Exception $ex) {
 						$result["error"]  = $ex->getMessage();
 					}

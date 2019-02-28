@@ -4,12 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $this->view('include/header');
 ?>
 <div class="content-wrapper">
-	<section id="intro" class="main">
-		<p>Главная страница</p>
-		<ul class="actions">
-			<li><a href="/" class="button big">Добавить комментарий</a></li>
-		</ul>
-	</section>
 </div>
 <section class="pagination-container">
 	<div class="pagination">
@@ -46,7 +40,9 @@ $this->view('include/header');
 <script src="/assets/js/main.js"></script>
 <script type="text/javascript">
 	showPagination(<?php echo (string)$pagesCount?>, <?php echo (string)$currentPage?>);
+	showPage(<?php echo json_encode($page, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)?>);
 	window["csrf_hash"] = "<?php echo $csrf_hash?>";
+	window["userId"] = "<?php echo $userId?>";
 </script>
 <?php
 $this->view('include/footer');

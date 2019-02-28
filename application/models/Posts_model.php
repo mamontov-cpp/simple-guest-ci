@@ -57,7 +57,13 @@ class Posts_model extends CI_Model
 		$offset = ($pageIndex - 1) * self::PAGE_SIZE;
 		$sql = 'SELECT `posts`.`id`, `posts`.`user_id`, `users`.`email` AS `user`, `posts`.`text`, DATE_FORMAT(`posts`.`date`, \'%d.%m.%Y\') AS `date` FROM `posts` LEFT JOIN `users` ON `users`.`id` = `posts`.`user_id` ORDER BY `id` ASC LIMIT ?, ?';
 		$binds = array($offset, self::PAGE_SIZE);
-		return $query = $this->db->query($sql, $binds)->result();
+		$result = $this->db->query($sql, $binds)->result();
+		if (count($result)) {
+			foreach($result as $item) {
+				$item->text = htmlspecialchars($item->text);
+			}
+		}
+		return $result;
 	}
 
 	/**
@@ -89,7 +95,7 @@ class Posts_model extends CI_Model
 		$data = array(
 			'user_id'  => $userId,
 			'text'    => $text,
-            'date' => date("Y-m-d")
+			'date' => date("Y-m-d")
 		);
 		$this->db->insert('posts', $data);
 		$id = $this->db->insert_id();
