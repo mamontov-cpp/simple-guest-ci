@@ -294,7 +294,7 @@ button:disabled,
 	input[type="button"],
 	button,
 	.button {
-		padding: 0;
+		padding: 0.5em;
 	}
 }
 
@@ -632,6 +632,14 @@ table td, table th {
 	width: 270px;
 	display: inline-block;
 	text-align: right;
+}
+
+@media screen and (max-width: 480px) {
+    .change-pwd-label, .register-label, .edit-user-label, .simple-edit-label {
+        width: 270px;
+        display: block;
+        text-align: center;
+    }
 }
 
 /* Редактирование пользователя */

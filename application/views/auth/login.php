@@ -28,7 +28,7 @@ $this->view('include/header');
 
 <?php echo form_close();?>
 
-<p><a href="forgot_password">Забыли пароль?</a>&nbsp;|&nbsp;<a href="register">Регистрация</a></p>
+<p><a href="/auth/forgot_password">Забыли пароль?</a>&nbsp;|&nbsp;<a href="/auth/register">Регистрация</a></p>
 </section>
 <?php
 $this->view('include/footer');
