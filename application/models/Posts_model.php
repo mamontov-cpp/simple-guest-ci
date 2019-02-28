@@ -37,7 +37,7 @@ class Posts_model extends CI_Model
 		if (($count % self::PAGE_SIZE) == 0) {
 			return $count / self::PAGE_SIZE;
 		}
-		return $count / self::PAGE_SIZE + 1;
+		return floor($count / self::PAGE_SIZE) + 1;
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Posts_model extends CI_Model
 	 */
 	public function getPage($pageIndex)
 	{
-		if (!is_string($pageIndex) && !is_int($pageIndex)) {
+		if (!is_string($pageIndex) && !is_numeric($pageIndex)) {
 			return array();
 		}
 		$pageIndex = intval($pageIndex);
@@ -55,7 +55,7 @@ class Posts_model extends CI_Model
 			return array();
 		}
 		$offset = ($pageIndex - 1) * self::PAGE_SIZE;
-		$sql = 'SELECT * FROM `posts` LIMIT ?, ?';
+		$sql = 'SELECT `posts`.`id`, `posts`.`user_id`, `users`.`email` AS `user`, `posts`.`text`, DATE_FORMAT(`posts`.`date`, \'%d.%m.%Y\') AS `date` FROM `posts` LEFT JOIN `users` ON `users`.`id` = `posts`.`user_id` ORDER BY `id` ASC LIMIT ?, ?';
 		$binds = array($offset, self::PAGE_SIZE);
 		return $query = $this->db->query($sql, $binds)->result();
 	}
@@ -89,8 +89,9 @@ class Posts_model extends CI_Model
 		$data = array(
 			'user_id'  => $userId,
 			'text'    => $text,
+            'date' => date("Y-m-d")
 		);
-		$this->db->insert('captcha', $data);
+		$this->db->insert('posts', $data);
 		$id = $this->db->insert_id();
 		return $id;
 	}
@@ -107,7 +108,7 @@ class Posts_model extends CI_Model
 		$this->throwExceptionIfUserIsInvalid($userId, "Авторизуйтесь, чтобы удалить свои посты");
 
 		$idIsInvalid = true;
-		if (is_string($id) || is_int($id)) {
+		if (is_string($id) || is_numeric($id)) {
 			$id = intval($id);
 			if ($id > 0) {
 				$idIsInvalid = false;
@@ -140,7 +141,7 @@ class Posts_model extends CI_Model
 	private function throwExceptionIfUserIsInvalid($userId, $message)
 	{
 		$userIdIsInvalid = true;
-		if (is_string($userId) || is_int($userId)) {
+		if (is_string($userId) || is_numeric($userId)) {
 			$userId = intval($userId);
 			if ($userId > 0) {
 				$sql = 'SELECT COUNT(`id`) AS `count` FROM `users` WHERE `id` = ? LIMIT 1' ;

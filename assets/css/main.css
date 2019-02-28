@@ -585,6 +585,20 @@ a.return header {
 	cursor: pointer !important;
 }
 
+textarea {
+	width: 350px;
+	height: 200px;
+	border-radius: 4px;
+}
+
+.disabled {
+	opacity: 0.5;
+}
+
+input[type=submit] {
+	outline: none;
+}
+
 #errorMessage p {
 	border: 1px solid rgb(255,128,128);
 	background-color: rgb(255,250,250);

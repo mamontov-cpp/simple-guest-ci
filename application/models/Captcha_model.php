@@ -42,7 +42,7 @@ class Captcha_model extends CI_Model
 			'word_length'   => 8,
 			'font_size'     => 16,
 			'img_id'        => 'Imageid',
-			'pool'          => '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+			'pool'          => '12345789ABCDEFHIJKLMNPRSTUVWXYZ',
 
 			// Белый фон, черный текст, сеточка
 			'colors'        => array(
