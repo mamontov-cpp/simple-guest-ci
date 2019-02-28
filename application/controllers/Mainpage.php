@@ -36,8 +36,11 @@ class Mainpage extends CI_Controller
 		$this->captcha_model->deleteOldEntries();
 		$data['captcha'] = $this->captcha_model->makeCAPTCHAEntry();
 
-        //$count = $this->posts_model->getPagesCount();
-        //var_dump($count);
+		// Отключаем скрипты в футере - их надо подключать до кастомного когда
+		$data["noScriptsInFooter"] = true;
+		$count = $this->posts_model->getPagesCount();
+		$data["pagesCount"] = $count;
+		$data["currentPage"] = 1;
         //var_dump($this->posts_model->getPage($count));
 		$this->load->view('index', $data);
 	}

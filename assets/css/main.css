@@ -651,3 +651,51 @@ p.save-btn-edit-wrapper {
 	display: inline-block;
 	text-align: right;
 }
+
+/* Постраничка */
+
+.pagination {
+	display: table;
+	margin: 1em auto 2em;
+}
+
+.pagination-row {
+	display: table-row;
+}
+
+
+.pagination-item {
+	display: table-cell;
+	padding: 0.5em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.pagination-item-active {
+	background-color: #ffffff;
+	border-radius: 4px;
+}
+
+.pagination-item-current {
+	background-color: rgb(240, 240, 240);
+	border-radius: 4px;
+}
+
+.post {
+	position: relative;
+}
+
+.posts-name {
+	text-align: left;
+	border-bottom: dotted 1px;
+	top: 1em;
+	left: 1em;
+}
+
+.posts-date {
+	text-align: right;
+	border-bottom: dotted 1px;
+	position: absolute;
+	top: 1em;
+	right: 1em;
+}

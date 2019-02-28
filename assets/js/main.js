@@ -1,3 +1,63 @@
+/**
+ * Показывает постраничку
+ * @param {Number} pageCount число страниц
+ * @param {Number} currentPage текущая страница
+ */
+var showPagination = function(pageCount, currentPage)  {
+	// 7 определено таким образом - первая + последняя + по две обрамляющие кнопки с одной стороны для текущей страницы
+	var result = "", i = 1;
+	var row  = $(".pagination-row");
+	if (pageCount === 0) {
+		row.html("");
+	}
+	if (pageCount <= 7) {
+		for (;i <= pageCount; i++) {
+			if (i !== currentPage) {
+				result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts/get_page/" + i + "/\">" + i + "</a></div>";
+			} else {
+				result += "<div class=\"pagination-item pagination-item-current\">" + i + "</div>";
+			}
+		}
+	} else {
+		if (i < 5) {
+			for (; i <= 6; i++) {
+				if (i !== currentPage) {
+					result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts/get_page/" + i + "/\">" + i + "</a></div>";
+				} else {
+					result += "<div class=\"pagination-item pagination-item-current\">" + i + "</div>";
+				}
+			}
+			result += "<div class=\"pagination-item\">...</div>";
+			result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts/get_page/" + pageCount + "/\">" + pageCount + "</a></div>";
+		} else {
+			if (pageCount - currentPage < 4) {
+				result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts/get_page/1/\">1</a></div>";
+				result += "<div class=\"pagination-item\">...</div>";
+				for (i = pageCount - 5; i <= pageCount; i++) {
+					if (i !== currentPage) {
+						result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts/get_page/" + i + "/\">" + i + "</a></div>";
+					} else {
+						result += "<div class=\"pagination-item pagination-item-current\">" + i + "</div>";
+					}
+				}
+			} else {
+				result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts/get_page/1/\">1</a></div>";
+				result += "<div class=\"pagination-item\">...</div>";
+				for (i = currentPage - 2; i <= currentPage + 2; i++) {
+					if (i !== currentPage) {
+						result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts/get_page/" + i + "/\">" + i + "</a></div>";
+					} else {
+						result += "<div class=\"pagination-item pagination-item-current\">" + i + "</div>";
+					}
+					result += "<div class=\"pagination-item\">...</div>";
+					result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts/get_page/" + pageCount + "/\">" + pageCount + "</a></div>";
+				}
+			}
+		}
+	}
+	row.html(result);
+};
+
 (function($) {
 	skel.breakpoints({
 		xlarge: '(max-width: 1680px)',
