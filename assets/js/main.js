@@ -49,9 +49,9 @@ var showPagination = function(pageCount, currentPage)  {
 					} else {
 						result += "<div class=\"pagination-item pagination-item-current\">" + i + "</div>";
 					}
-					result += "<div class=\"pagination-item\">...</div>";
-					result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts_get_page/" + pageCount + "/\">" + pageCount + "</a></div>";
 				}
+				result += "<div class=\"pagination-item\">...</div>";
+				result += "<div class=\"pagination-item pagination-item-active\"><a href=\"/ajax/posts_get_page/" + pageCount + "/\">" + pageCount + "</a></div>";
 			}
 		}
 	}
@@ -118,6 +118,7 @@ var showPage = function(items) {
 						} else {
 							showPagination(data["pages"], data["current_page"]);
 							showPage(data["items"]);
+							// Скроллим куски
 							$([document.documentElement, document.body]).animate({
 								scrollTop: $(".content-wrapper").offset().top
 							}, 500);
