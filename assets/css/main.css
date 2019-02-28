@@ -546,7 +546,7 @@ body.is-loading #header.alt .inner {
 
 /* Большой блок  интро */
 
-#intro {
+#intro, .large-block {
 	padding: 4em 4em 2em 4em;
 	background-color: #ffffff;
 	border-radius: 4px;
@@ -554,17 +554,17 @@ body.is-loading #header.alt .inner {
 }
 
 @media screen and (max-width: 736px) {
-	#intro {
+	#intro, .large-block {
 		padding: 2em 2em 0.1em 2em;
 	}
 }
 
 @media screen and (max-width: 480px) {
-	#intro {
+	#intro, .large-block {
 		padding: 2em 1em 0.1em 1em;
 	}
 
-	#intro p br {
+	#intro, .large-block p br {
 		display: none;
 	}
 }
